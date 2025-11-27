@@ -1,0 +1,30 @@
+cd ~/junhe_ws
+catkin_make
+mkdir -p ~/junhe_ws/src
+cd ~/catkin_ws
+catkin_make
+
+cd ~/jun_ws/src
+catkin_create_pkg maxi_aruco_det_pkg rospy std_msgs roscpp
+cd ~/jun_ws
+catkin_make
+
+echo "source ~/jun_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+g++ aruco_detection.cpp -o aruco_detection `pkg-config --cflags --libs opencv4`
+
+roslaunch livox_ros_driver2 msg_MID360.launch
+
+roslaunch fast_lio mapping_mid360.launch
+
+roslaunch zed_wrapper zed2.launch
+
+rosbag record \
+/livox/lidar \
+/livox/imu \
+/zed2/zed_node/rgb/image_rect_color \
+/zed2/zed_node/imu/data \
+/tf 
+
+rostopic echo /zed2/zed_node/left/camera_info

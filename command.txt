@@ -14,17 +14,17 @@ source ~/.bashrc
 
 g++ aruco_detection.cpp -o aruco_detection `pkg-config --cflags --libs opencv4`
 
+
+
 roslaunch livox_ros_driver2 msg_MID360.launch
-
 roslaunch fast_lio mapping_mid360.launch
-
 roslaunch zed_wrapper zed2.launch
 
 rosbag record \
-/livox/lidar \
+/cloud_registered \
 /livox/imu \
 /zed2/zed_node/rgb/image_rect_color \
 /zed2/zed_node/imu/data \
 /tf 
 
-rostopic echo /zed2/zed_node/left/camera_info
+

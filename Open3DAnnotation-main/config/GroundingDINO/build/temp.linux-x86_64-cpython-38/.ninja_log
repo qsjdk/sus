@@ -1,0 +1,5 @@
+# ninja log v5
+1	762	1744557050834623399	/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/build/temp.linux-x86_64-cpython-38/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/groundingdino/models/GroundingDINO/csrc/cuda_version.o	aacb232c553ef797
+0	4416	1744557054482840173	/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/build/temp.linux-x86_64-cpython-38/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/ms_deform_attn_cpu.o	5e5c62b134dff849
+0	8758	1744557058827097582	/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/build/temp.linux-x86_64-cpython-38/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/groundingdino/models/GroundingDINO/csrc/MsDeformAttn/ms_deform_attn_cuda.o	550d95109ab19684
+1	12597	1744557062659323997	/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/build/temp.linux-x86_64-cpython-38/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/groundingdino/models/GroundingDINO/csrc/vision.o	abe2202cc68a8d6c

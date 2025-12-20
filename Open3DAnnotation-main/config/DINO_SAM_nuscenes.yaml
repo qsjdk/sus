@@ -1,0 +1,85 @@
+## Data Processing Configuration for NuScenes
+dataset:
+    type: "nuscenes"  # 指定数据集类型为 NuScenes
+    # dataroot: "/home/sustech/Dataset/nuscenes" # NuScenes 数据集的根目录
+    dataroot: "/home/hejun/Dataset/nuscenes" # NuScenes 数据集的根目录
+
+    version: "v1.0-trainval" # NuScenes 版本, 例如: "v1.0-trainval" 或 "v1.0-mini"
+    # scenes: ["scene-0001", "scene-0002", "scene-0003", "scene-0004", "scene-0005", 
+    #         "scene-0006", "scene-0007", "scene-0008", "scene-0009", "scene-0010",
+    #          "scene-0011", "scene-0012", "scene-0013", "scene-0014", "scene-0015",
+    #           "scene-0016", "scene-0017", "scene-0018", "scene-0019", "scene-0020", 
+    #           "scene-0021", "scene-0022", "scene-0023", "scene-0024", "scene-0025",
+    #            "scene-0026", "scene-0027", "scene-0028", "scene-0029", "scene-0030"]
+    scenes: []
+    
+# Data Processing
+processing:
+    # Lidar processing
+    use_patchwork: true  # 是否使用Patchwork++进行地面分割
+    voxelmap:
+        use_relation: true
+        relation_threshold: 0.3
+        voxel_size: 0.2
+        max_frames: 50
+        mode: "dirichlet"   # Options: "frequency", "bayesian", "maximal", "dirichlet"
+        update_threshold: 1
+        init_alpha: 1.
+        use_key_frame: False
+        key_frame_dist_thres: 1.0
+        key_frame_angle_thres: 0.2 # radius  
+ 
+## Model Configuration
+model_config:
+    device: "cuda:0"
+    DetectionModel:
+        model_name: "GroundingDINO"
+        # model_config_path: "/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/config/GroundingDINO_SwinT_OGC.py"
+        model_config_path: "/home/hejun/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/config/GroundingDINO_SwinT_OGC.py"
+
+        # model_checkpoint_path: "/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/checkpoint/groundingdino_swint_ogc.pth"
+        model_checkpoint_path: "/home/hejun/OpenVocabulary/lidar_photo/MyOpenProject/VLM/GroundingDINO/checkpoint/groundingdino_swint_ogc.pth"
+
+        use_cluster: false
+        eps: 1.2
+        min_samples: 5
+        nms_iou_threshold: 0.5
+        max_detections: 100
+        box_threshold: 0.25
+        text_threshold: 0.25
+        nms_threshold: 0.5
+
+    SegmentationModel:
+        model_name: "SAM"
+        encoder_version: "vit_h"
+        # model_checkpoint_path: "/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/Segment_Module/segment-anything/checkpoint/sam_vit_h_4b8939.pth"
+        model_checkpoint_path: "/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/Segment_Module/segment-anything/checkpoint/sam_vit_h_4b8939.pth"
+
+        model_config_path: 
+
+evaluation:
+  reporting_mode: 'all' # 'global' 'per_sequence' 'all'
+
+save:
+    # output_path: "/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/outputs_nuscene" # 修改为您的输出目录
+    output_path: "/home/hejun/OpenVocabulary/lidar_photo/MyOpenProject/outputs_nuscene" # 修改为您的输出目录
+
+    save_local_points: false
+    save_global_points: false
+    save_segmented_images: false
+    save_detection_images: false
+    save_time: true
+    save_label: true
+    save_error_points: false
+    save_pred_prob: true
+
+
+external_feature:
+    load_feature: false
+    save_feature: false
+    # feature_path: "/home/sustech/OpenVocabulary/lidar_photo/MyOpenProject/"
+    feature_path: "/home/hejun/OpenVocabulary/lidar_photo/MyOpenProject/"
+
+pcnetwork:
+    use_net: false
+    net_feature_path: ""
